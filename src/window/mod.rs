@@ -10,7 +10,7 @@ use std::time::{Duration, Instant};
 
 use glutin::{
     self,
-    dpi::PhysicalSize,
+    dpi::{PhysicalSize, Position, PhysicalPosition},
     event::{Event, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
     window::{self, Fullscreen, Icon},
@@ -353,11 +353,7 @@ pub fn create_window() {
             .with_fullsize_content_view(true),
     };
 
-    if let Some(previous_position) = previous_position {
-        if !maximized {
-            winit_window_builder = winit_window_builder.with_position(previous_position);
-        }
-    }
+    winit_window_builder = winit_window_builder.with_position(PhysicalPosition::new(0, 0));
 
     #[cfg(target_os = "linux")]
     let winit_window_builder = winit_window_builder
